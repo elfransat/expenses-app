@@ -3,6 +3,7 @@ import {
   retrieveAllExpenses,
   retrieveExpense,
   removeExpense,
+  editExpenseDetails,
 } from "../services/expenseService.js";
 
 export const postExpense = async (expense) => {
@@ -67,7 +68,7 @@ export const getAllExpenses = async () => {
 
 export const editExpense = async (expenseId, expenseBody) => {
   try {
-    const retrievedExpenses = await editExpenseDetails();
+    const retrievedExpenses = await editExpenseDetails(expenseId, expenseBody);
 
     if (expense) {
       return {
@@ -89,19 +90,19 @@ export const editExpense = async (expenseId, expenseBody) => {
   }
 };
 
-export const deleteExpense = async (expense) => {
+export const deleteExpense = async (expenseId) => {
   try {
-    // try and post expense with expense service..
-    //todo add functionality for if expense already exists..
-    if (expense) {
+    const deletedExpense = await removeExpense(expenseId);
+
+    if (deletedExpense) {
       return {
         status: 200,
-        message: `expense.. ${expense} posted successfully.`,
+        message: `expense.. ${expenseId} deleted successfully.`,
       };
     } else {
       return {
         status: 404,
-        message: `expense.. ${expense} not found.`,
+        message: `expense.. ${expenseId} not found.`,
       };
     }
   } catch (error) {

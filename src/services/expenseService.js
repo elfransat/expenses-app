@@ -2,7 +2,7 @@ import Expense from "../models/expenses.js";
 
 export const saveExpense = async (expense) => {
   try {
-    await Expense.create(expense);
+    return await Expense.create(expense);
   } catch (error) {
     console.error("Error saving expense:", error);
   }
@@ -26,12 +26,15 @@ export const retrieveAllExpenses = async () => {
 
 export const editExpenseDetails = async (expenseId, expense) => {
   try {
-    return await Expense.findOneAndUpdate({ _id: expenseId });
+    return await Expense.findOneAndUpdate(
+      { _id: expenseId },
+      { $set: expense },
+    );
   } catch (error) {
-    console.error("Error retrieving expense:", error);
+    console.error("Error editing expense:", error);
   }
 };
 
-export const removeExpense = async () => {
-  console.log(Expense);
+export const removeExpense = async (expenseId) => {
+  return await Expense.findByIdAndDelete({ _id: expenseId });
 };

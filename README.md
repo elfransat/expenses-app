@@ -2,6 +2,6 @@
 
 #todo
 
-## create basic structure with MVC
+## ensure all endpoints work as should
 
 ## user authentication with JWT
