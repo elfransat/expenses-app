@@ -1,5 +1,5 @@
 import express from "express";
-// import { authRoutes } from "./src/routes/authRoutes.js";
+import { authRoutes } from "./src/routes/authRoutes.js";
 import { expenseRoutes } from "./src/routes/expenseRoutes.js";
 import mongoose from "mongoose";
 
@@ -18,5 +18,5 @@ app.listen(3000, () => {
   console.log("listening on 3000");
 });
 
-// app.use(authRoutes);
 app.use(expenseRoutes);
+app.use(authRoutes);
